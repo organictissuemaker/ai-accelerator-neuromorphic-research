@@ -1,6 +1,6 @@
 # AI Accelerator & Neuromorphic Computing Research
 
-**Summer 2025 Research | SUTD Singapore | UC Berkeley EECS**
+**Summer 2026 Research | SUTD Singapore | UC Berkeley EECS**
 
 Exploring innovative design methodologies for AI accelerators and neuromorphic computing systems — integrating energy-efficient, scalable, and brain-inspired architectures for next-generation intelligent devices.
 
