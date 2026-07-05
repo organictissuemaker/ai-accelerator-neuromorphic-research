@@ -60,7 +60,7 @@
 
 ---
 
-## 2-Sentence Recruiter Explanation
+## 2-Sentence Explanation
 
-*Practice explaining this paper simply. Write it as if you're telling a NVIDIA recruiter why it matters.*
+*Practice explaining this paper simply. 
 
