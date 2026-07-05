@@ -62,9 +62,3 @@ python simulations/accelerator/arch_comparison.py
 ```
 
 ---
-
-## About
-
-**Researcher:** Zena Wu | UC Berkeley EECS  
-**Supervisor:** Dr. Shubhakar Kalya | SUTD  
-**Topics:** AI Accelerators, Neuromorphic Computing, Spiking Neural Networks, Memristors, RRAM, Hardware-Software Co-Design
