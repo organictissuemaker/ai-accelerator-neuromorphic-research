@@ -96,12 +96,11 @@ This paper explains why AI accelerators exist and what problem they solve — da
 ---
 
 ## What I'd Explore Further
-
-How does the row-stationary dataflow from Eyeriss compare to how neuromorphic chips like Loihi handle data movement? 
+- How does the row-stationary dataflow from Eyeriss compare to how neuromorphic chips like Loihi handle data movement? 
     - Eyeriss: minimizes data movement by being smart about scheduling — it decides in advance what data to keep close and reuses it as many times as possible before fetching new data. It still runs on a clock, meaning every cycle costs energy whether or not useful work happens.
     - Loihi: doesn't schedule data movement at all. Nothing moves unless a neuron fires. The hardware is silent by default and only activates when a spike arrives. So instead of minimizing data movement (eliminates most of it)
     - Both solve the same problem but from opposite directions: Eyeriss optimizes the movement that has to happen, Loihi avoids the movement altogether.
-SNNs fire sparsely — does event-driven computation naturally solve the data movement problem this paper describes?
+- SNNs fire sparsely — does event-driven computation naturally solve the data movement problem this paper describes?
     - Yes in an SNN, a neuron only fires maybe 1-5% of the time. That means 95-99% of the time, there's no output, no data to move, no memory access needed.
     - The event-driven architecture physically enforces this — circuits only switch when a spike occurs, so zero spikes = zero switching = zero energy. This is why Loihi achieves 200x lower energy than a GPU on sparse tasks like keyword spotting.
     - However, for dense tasks where neurons fire frequently, the sparsity advantage disappears and neuromorphic chips lose their edge over conventional accelerators.
