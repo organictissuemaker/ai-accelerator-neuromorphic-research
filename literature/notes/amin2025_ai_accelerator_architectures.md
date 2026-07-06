@@ -22,7 +22,7 @@ Modern AI models (DNNs, LLMs) have grown to billions/trillions of parameters, br
 
 ## Key Contribution
 
-A structured comparative survey of dominant AI accelerator paradigms with a unified trade-off analysis (performance vs. efficiency vs. flexibility) and quantitative benchmarking data from MLPerf Inference v5.1. Key insight: hardware-software co-design is a core requirement for efficient AI systems.
+**A structured comparative survey of dominant AI accelerator paradigms with a unified trade-off analysis (performance vs. efficiency vs. flexibility) and quantitative benchmarking data from MLPerf Inference v5.1. Key insight: hardware-software co-design is a core requirement for efficient AI systems.**
 ![alt text](image-1.png)
 ---
 
