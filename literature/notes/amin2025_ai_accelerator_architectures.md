@@ -7,11 +7,10 @@
 ## Paper Info
 
 - **Title:** The Role of Advanced Computer Architectures in Accelerating Artificial Intelligence Workloads
-- **Authors: Shahid Amin, Syed Pervez Hussnain Shah (Lahore Leads University)
- **
-- **Year: 2025 **
-- **Venue: arXiv preprint (arXiv:2511.10010v1) ** 
-- **Link: https://arxiv.org/abs/2511.10010 **
+- **Authors:** Shahid Amin, Syed Pervez Hussnain Shah (Lahore Leads University)
+- **Year:** 2025
+- **Venue:** arXiv preprint (arXiv:2511.10010v1) 
+- **Link:** https://arxiv.org/abs/2511.10010
 
 ---
 
