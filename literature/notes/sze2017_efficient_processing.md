@@ -82,10 +82,17 @@ complexity and abstraction than shallower neural networks
 
 *What numbers matter? Fill in what they measured.*
 
+<<<<<<< HEAD
 | Metric | Their Result | Compared To |
 | Energy per DRAM access ~200 pJ vs. ~1 pJ for register access (200x more energy) 
 | Eyeriss power: 278 mW running AlexNet (10x better than mobile GPU)
 | Eyeriss throughput: 35 fps vs. Mobile GPU baseline 
+=======
+- | Metric | Their Result | Compared To |
+- | Energy per DRAM access | ~200 pJ | ~1 pJ for register access |
+- | Eyeriss power | 278 mW running AlexNet | 10x better than mobile GPU |
+- | Eyeriss throughput | 35 fps | Mobile GPU baseline |
+>>>>>>> 9d47c7bd3560dd27bceba4f8e6fee4e5d2179de5
 
 ---
 
