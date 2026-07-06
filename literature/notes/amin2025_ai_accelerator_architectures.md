@@ -64,9 +64,18 @@ The co-design argument (hardware and software must be designed together) is dire
 
 ## What I'd Explore Further
 
-- Roofline model: How do you mathematically determine whether a design is compute-bound vs. memory-bound? The paper mentions it but doesn't walk through it.
-- KV-cache management for LLMs: The paper calls this an open challenge — how do current chips manage growing KV-cache during long-context inference?
-- NVLink vs. CXL: When would you choose one over the other for multi-chip systems?
+- Roofline model: How do you mathematically determine whether a design is compute-bound vs. memory-bound? 
+  - X-axis: arithmetic intensity (how many FLOPs you do per byte of memory you move)
+  - Y-axis: performance (FLOPs/sec you actually achieve)
+
+Two limits define the roof:
+
+Compute ceiling — your chip's peak FLOPs/sec (horizontal line)
+Memory bandwidth slope — performance = arithmetic intensity × memory bandwidth (diagonal line)
+
+Where they intersect is the "ridge point." If your workload sits left of the ridge → memory-bound (you're waiting on data, not compute). Right of the ridge → compute-bound.
+Eyeriss connection: RS dataflow exists specifically to push workloads to the right (higher arithmetic intensity) by reusing data in local registers instead of going back to DRAM every time.
+
 ---
 
 ## 2-Sentence Explanation
