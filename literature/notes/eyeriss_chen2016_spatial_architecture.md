@@ -6,11 +6,11 @@
 
 ## Paper Info
 
-- **Title: Eyeriss: A Spatial Architecture for Energy-Efficient Dataflow for Convolutional Neural Networks **
-- **Authors: Yu-Hsin Chen, Tushar Krishna, Joel Emer, Vivienne Sze **
-- **Year: 2016 **
-- **Venue:ISCA (International Symposium on Computer Architecture) 
-- **Link: https://dl.acm.org/doi/10.1145/3007787.3001177 **
+- **Title:** Eyeriss: A Spatial Architecture for Energy-Efficient Dataflow for Convolutional Neural Networks 
+- **Authors:** Yu-Hsin Chen, Tushar Krishna, Joel Emer, Vivienne Sze
+- **Year:** 2016
+- **Venue:** ISCA (International Symposium on Computer Architecture) 
+- **Link:** https://dl.acm.org/doi/10.1145/3007787.3001177
 
 ---
 
