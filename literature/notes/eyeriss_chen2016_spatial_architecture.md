@@ -49,10 +49,10 @@ RS maximizes reuse at three levels:
 *What numbers matter? Fill in what they measured.*
 
 | Metric | Their Result | Compared To |
-
+|---|---|---|
 | Power | 278 mW | ~2,780 mW mobile GPU (10x better) |
-Throughput: 35 fps running AlexNet vs. Mobile GPU baseline
-Data movement: energyMinimized across all types vs. Prior dataflows optimized only one type at a time
+| Throughput | 35 fps running AlexNet | Mobile GPU baseline |
+| Data movement | energyMinimized across all types | Prior dataflows optimized only one type at a time |
 
 ---
 
