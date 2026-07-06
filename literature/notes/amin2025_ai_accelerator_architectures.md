@@ -6,7 +6,7 @@
 
 ## Paper Info
 
-- **Title: The Role of Advanced Computer Architectures in Accelerating Artificial Intelligence Workloads **
+- **Title: ** The Role of Advanced Computer Architectures in Accelerating Artificial Intelligence Workloads
 - **Authors: Shahid Amin, Syed Pervez Hussnain Shah (Lahore Leads University)
  **
 - **Year: 2025 **
