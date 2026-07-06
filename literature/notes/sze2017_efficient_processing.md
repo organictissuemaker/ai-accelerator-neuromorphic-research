@@ -6,13 +6,12 @@
 
 ## Paper Info
 
-- **Title: Efficient Processing of Deep Neural Networks:
-A Tutorial and Survey**
-- **Authors: Vivienne Sze, Senior Member, IEEE, Yu-Hsin Chen, Student Member, IEEE, Tien-Ju Yang, Student
-Member, IEEE, Joel Emer, Fellow, IEEE **
-- **Year: 13 Aug 2017 **
-- **Venue: arXivLabs ** (e.g., ISCA, IEEE, Nature, arXiv)
-- **Link: https://arxiv.org/abs/1703.09039 **
+- **Title:**  Efficient Processing of Deep Neural Networks: A Tutorial and Survey
+- **Authors:** Vivienne Sze, Senior Member, IEEE, Yu-Hsin Chen, Student Member, IEEE, Tien-Ju Yang, Student
+Member, IEEE, Joel Emer, Fellow, IEEE 
+- **Year:** 13 Aug 2017 
+- **Venue:** arXivLabs
+- **Link:** https://arxiv.org/abs/1703.09039 
 
 ---
 
