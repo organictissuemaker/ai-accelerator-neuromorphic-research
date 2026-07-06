@@ -19,6 +19,7 @@
 Finding a dataﬂow that supports parallel processing withminimal data movement cost is crucial to achieving energy-efﬁcient CNN processing without compromising accuracy. 
 
 Prior dataflows (weight stationary, output stationary) optimized for only one type of data reuse at a time — Eyeriss's row-stationary approach minimizes movement across all data types simultaneously.
+
 ---
 
 ## Key Contribution
@@ -36,8 +37,6 @@ RS maximizes reuse at three levels:
 
 ## Architecture / Method (if applicable)
 
-*Describe the chip, system, or algorithm design. Include a sketch or describe key components.*
-
 - Component 1: 168 PE spatial array — processing elements arranged in a grid, each with its own local scratchpad memory. PEs communicate directly with neighbors without going back to global memory, enabling inter-PE data reuse
 - Component 2: Reconfigurable multicast on-chip network — routes data from the global buffer to PEs efficiently. One weight value can be broadcast to multiple PEs simultaneously, drastically reducing how many times data is fetched from memory
 - Key design decision: Row-stationary dataflow — maps one row of a CNN filter computation onto one PE. Each PE accumulates partial sums locally, reuses weights and input activations from its scratchpad, and passes data to neighboring PEs directly. This minimizes movement at all three levels simultaneously: local scratchpad, inter-PE, and global buffer
@@ -45,8 +44,6 @@ RS maximizes reuse at three levels:
 ---
 
 ## Results
-
-*What numbers matter? Fill in what they measured.*
 
 | Metric | Their Result | Compared To |
 |---|---|---|
