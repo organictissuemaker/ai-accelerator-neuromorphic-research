@@ -4,7 +4,7 @@ Leaky Integrate-and-Fire (LIF) Neuron Simulator
 A basic SNN building block. Simulates how a biological neuron
 integrates input current and fires a spike when voltage threshold is crossed.
 
-This is your starting point — extend this to build a full SNN layer.
+Extend this to build a full SNN layer.
 """
 
 import numpy as np
