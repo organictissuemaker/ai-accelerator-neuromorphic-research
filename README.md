@@ -13,8 +13,6 @@ Conventional processors (CPUs and GPUs) face fundamental limits in power efficie
 - **AI Accelerator Architecture** — energy-efficient hardware designs optimized for ML/DL inference
 - **Neuromorphic Computing** — brain-inspired, event-driven architectures using Spiking Neural Networks (SNNs)
 
-The goal is to explore hybrid architectures capable of real-time adaptive learning at the edge, relevant to robotics, autonomous vehicles, and intelligent sensing.
-
 ---
 
 ## What's in This Repo
