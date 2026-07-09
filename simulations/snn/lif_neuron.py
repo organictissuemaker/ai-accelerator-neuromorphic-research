@@ -26,7 +26,7 @@ DT      = 1e-4    # simulation time step (seconds)
 T_SIM   = 0.5     # total simulation time (seconds)
 
 TAU_SYN = 5e-3
-W_SYN = 5e-9
+W_SYN = 10e-9
 
 
 # def simulate_lif(I_input):
