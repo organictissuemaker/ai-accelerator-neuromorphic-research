@@ -5,7 +5,6 @@ Compares estimated power and latency for a simple inference workload
 across three compute paradigms.
 
 NOTE: Values here are illustrative estimates based on literature.
-Replace with your own measured/sourced numbers as you progress.
 Sources: Sze et al. 2017, Intel Loihi papers, public benchmarks.
 """
 
@@ -52,6 +51,27 @@ architectures = {
         "latency_ms": 28,
         "color": "#1F3864",
         "source": "Eyeriss: Chen et al. 2016, AlexNet inference"
+    },
+
+    #2025 reference chips
+    
+    "GPU 2025\n(NVIDIA GB200)": {
+        "power_mw": 1000000,   # ~1000W per GPU; Blackwell architecture
+        "latency_ms": 0.3,     # sub-ms for datacenter inference
+        "color": "#0D47A1",
+        "source": "NVIDIA GB200; MLPerf v5.1 datacenter inference submission"
+    },
+    "Accelerator 2025\n(Google TPU v5)": {
+        "power_mw": 150000,    # ~150W per TPU v5e chip
+        "latency_ms": 0.8,     # highly optimized for matrix ops
+        "color": "#1B5E20",
+        "source": "Google TPU v5e; MLPerf v5.1 inference submission"
+    },
+    "Neuromorphic 2025\n(Intel Loihi 2)": {
+        "power_mw": 1000,      # ~1W; 10x more powerful than Loihi 1
+        "latency_ms": 8,       # event-driven; best for sparse workloads
+        "color": "#4A148C",
+        "source": "Intel Loihi 2; Davies et al. 2021; sparse workload benchmark"
     },
 }
 
