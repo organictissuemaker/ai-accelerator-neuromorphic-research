@@ -176,7 +176,7 @@ def plot_two_neurons(t, V1, spikes1, V2, spikes2, I_input):
 
 if __name__ == "__main__":
     # Original: single neuron
-    I = 2e-9  
+    I = 3e-9  
     t, V, spikes = simulate_lif(I)
     plot_lif(t, V, spikes, I)
 

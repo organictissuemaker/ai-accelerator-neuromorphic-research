@@ -9,9 +9,15 @@ Replace with your own measured/sourced numbers as you progress.
 Sources: Sze et al. 2017, Intel Loihi papers, public benchmarks.
 """
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+
+# ── Resolve output directory relative to this script's location ──────────────
+SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
+FIGURES_DIR = os.path.normpath(os.path.join(SCRIPT_DIR, "../../results/figures"))
+os.makedirs(FIGURES_DIR, exist_ok=True)
 
 
 # ── Architecture Parameters (from literature) ─────────────────────────────────
@@ -75,7 +81,7 @@ def plot_power_latency_tradeoff():
 
     ax.grid(True, which="both", linestyle="--", alpha=0.4)
     plt.tight_layout()
-    plt.savefig("../../results/figures/power_latency_tradeoff.png", dpi=150)
+    plt.savefig(os.path.join(FIGURES_DIR, "power_latency_tradeoff.png"), dpi=150)
     plt.show()
 
 
@@ -96,7 +102,7 @@ def plot_power_bar():
                 f"{val:,} mW", ha="center", va="bottom", fontsize=8)
 
     plt.tight_layout()
-    plt.savefig("../../results/figures/power_comparison_bar.png", dpi=150)
+    plt.savefig(os.path.join(FIGURES_DIR, "power_comparison_bar.png"), dpi=150)
     plt.show()
 
 
