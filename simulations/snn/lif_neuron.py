@@ -28,33 +28,35 @@ T_SIM   = 0.5     # total simulation time (seconds)
 TAU_SYN = 5e-3
 W_SYN = 5e-9
 
-def simulate_lif(I_input):
-    """
-    Simulate a single LIF neuron given a constant input current.
 
-    Parameters:
-        I_input (float): Input current in amperes
+# def simulate_lif(I_input):
+#     """
+#     Simulate a single LIF neuron given a constant input current.
 
-    Returns:
-        t      : time array
-        V      : membrane voltage array
-        spikes : list of spike times
-    """
-    t = np.arange(0, T_SIM, DT)
-    V = np.full(len(t), V_REST)
-    spikes = []
+#     Parameters:
+#         I_input (float): Input current in amperes
 
-    for i in range(1, len(t)):
-        # LIF differential equation (Euler integration)
-        dV = (-(V[i-1] - V_REST) + R_M * I_input) / TAU_M * DT
-        V[i] = V[i-1] + dV
+#     Returns:
+#         t      : time array
+#         V      : membrane voltage array
+#         spikes : list of spike times
+#     """
+#     t = np.arange(0, T_SIM, DT)
+#     V = np.full(len(t), V_REST)
+#     spikes = []
 
-        # Fire and reset
-        if V[i] >= V_THRESH:
-            spikes.append(t[i])
-            V[i] = V_RESET
+#     for i in range(1, len(t)):
+#         # LIF differential equation (Euler integration)
+#         dV = (-(V[i-1] - V_REST) + R_M * I_input) / TAU_M * DT
+#         V[i] = V[i-1] + dV
 
-    return t, V, spikes
+#         # Fire and reset
+#         if V[i] >= V_THRESH:
+#             spikes.append(t[i])
+#             V[i] = V_RESET
+
+#     return t, V, spikes
+
 
 # ── Two Connected Neurons ─────────────────────────────────────────────────────
 def simulate_two_neurons(I_input):
