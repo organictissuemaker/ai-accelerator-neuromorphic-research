@@ -73,6 +73,15 @@ architectures = {
         "color": "#4A148C",
         "source": "Intel Loihi 2; Davies et al. 2021; sparse workload benchmark"
     },
+    "Desktop AI 2025\n(NVIDIA GB10 / DGX Spark)": {
+        "power_mw": 140000,    # 140W chip TDP (CPU+GPU combined)
+        "latency_ms": 3,       # small-DNN inference estimate; memory-bound
+                               # (273 GB/s LPDDR5x vs ~TB/s HBM on GB200)
+        "color": "#00695C",
+        "source": "NVIDIA DGX Spark datasheet 2025; GB10 Grace Blackwell, "
+                  "128GB unified memory, 1 PFLOP FP4"
+    },
+
 }
 
 
