@@ -118,12 +118,12 @@ def plot_power_latency_tradeoff():
     ax.margins(x=0.15, y=0.25)   # breathing room so labels stay inside the axes
 
     ax.set_xlabel("Inference Latency (ms) — lower is better",
-                  fontsize=11, fontname="EB Garamond")
+                  fontsize=11, fontname="Georgia")
     ax.set_ylabel("Power Consumption (mW) — lower is better",
-                  fontsize=11, fontname="EB Garamond")
+                  fontsize=11, fontname="Georgia")
     ax.set_title("Power vs. Latency Trade-off: AI Compute Architectures\n"
                  "(Log scale — closer to bottom-left = more efficient)",
-                 fontsize=12, fontname="EB Garamond")
+                 fontsize=12, fontname="Georgia")
 
     # Efficiency arrow
     ax.annotate("More efficient", xy=(0.15, 0.15), xytext=(0.35, 0.35),
