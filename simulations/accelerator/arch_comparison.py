@@ -88,19 +88,42 @@ architectures = {
 def plot_power_latency_tradeoff():
     fig, ax = plt.subplots(figsize=(10, 6))
 
+    # Per-chip label placement: (x_off, y_off) in points, plus alignment.
+    # Fixes the overlapping cluster (TPU v3 / V100 / GB10 / TPU v5) and
+    # keeps edge labels (CPU, GB200) inside the axes.
+    label_style = {
+        "CPU\n(Intel i7)":                            ((-12,  0),  "right", "center"),
+        "GPU\n(NVIDIA V100)":                         (( 10, 10),  "left",  "bottom"),
+        "AI Accelerator\n(Google TPU v3)":            ((-10, 10),  "right", "bottom"),
+        "Neuromorphic\n(Intel Loihi)":                (( 12,  0),  "left",  "center"),
+        "Eyeriss\n(MIT)":                             (( 12,  0),  "left",  "center"),
+        "GPU 2025\n(NVIDIA GB200)":                   (( 12, -4),  "left",  "top"),
+        "Accelerator 2025\n(Google TPU v5)":          ((-10, -12), "right", "top"),
+        "Neuromorphic 2025\n(Intel Loihi 2)":         (( 12,  0),  "left",  "center"),
+        "Desktop AI 2025\n(NVIDIA GB10 / DGX Spark)": ((  0, -14), "center", "top"),
+    }
+
     for name, data in architectures.items():
         ax.scatter(data["latency_ms"], data["power_mw"],
-                   color=data["color"], s=200, zorder=5)
+                   color=data["color"], s=100, zorder=5)   # was s=200 → 50% smaller
+        offset, ha, va = label_style.get(name, ((8, 5), "left", "bottom"))
         ax.annotate(name,
                     xy=(data["latency_ms"], data["power_mw"]),
-                    xytext=(8, 5), textcoords="offset points",
+                    xytext=offset, textcoords="offset points",
+                    ha=ha, va=va,
                     fontsize=9, color=data["color"], fontweight="bold")
 
     ax.set_xscale("log")
     ax.set_yscale("log")
-    ax.set_xlabel("Inference Latency (ms) — lower is better", fontsize=11)
-    ax.set_ylabel("Power Consumption (mW) — lower is better", fontsize=11)
-    ax.set_title("Power vs. Latency Trade-off: AI Compute Architectures\n(Log scale — closer to bottom-left = more efficient)", fontsize=12)
+    ax.margins(x=0.15, y=0.25)   # breathing room so labels stay inside the axes
+
+    ax.set_xlabel("Inference Latency (ms) — lower is better",
+                  fontsize=11, fontname="EB Garamond")
+    ax.set_ylabel("Power Consumption (mW) — lower is better",
+                  fontsize=11, fontname="EB Garamond")
+    ax.set_title("Power vs. Latency Trade-off: AI Compute Architectures\n"
+                 "(Log scale — closer to bottom-left = more efficient)",
+                 fontsize=12, fontname="EB Garamond")
 
     # Efficiency arrow
     ax.annotate("More efficient", xy=(0.15, 0.15), xytext=(0.35, 0.35),
