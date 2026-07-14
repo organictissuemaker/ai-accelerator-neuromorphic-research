@@ -103,6 +103,11 @@ def plot_power_latency_tradeoff():
     ax.set_yscale("log")
     ax.margins(x=0.15, y=0.25)
 
+    # Tick labels: 2 pts smaller (default 10 → 8) and bold
+    ax.tick_params(axis="both", labelsize=8)
+    for lbl in ax.get_xticklabels() + ax.get_yticklabels():
+        lbl.set_fontweight("bold")
+
     # Auto-resolve overlaps: nudges labels apart, draws a thin grey
     # line from label to dot when it has to move one far away
     adjust_text(texts, ax=ax,
@@ -135,8 +140,15 @@ def plot_power_bar():
     fig, ax = plt.subplots(figsize=(10, 5))
     bars = ax.bar(names, powers, color=colors, edgecolor="white", linewidth=0.5)
     ax.set_yscale("log")
-    ax.set_ylabel("Power (mW, log scale)")
-    ax.set_title("Power Consumption by Architecture")
+    ax.set_ylabel("Power (mW, log scale)",
+                  fontsize=11, fontname="Georgia", fontweight="bold")
+    ax.set_title("Power Consumption by Architecture",
+                 fontsize=12, fontname="Georgia", fontweight="bold")
+
+    # Match the scatter plot's tick formatting
+    ax.tick_params(axis="both", labelsize=8)
+    for lbl in ax.get_xticklabels() + ax.get_yticklabels():
+        lbl.set_fontweight("bold")
     ax.grid(axis="y", linestyle="--", alpha=0.4)
 
     for bar, val in zip(bars, powers):
