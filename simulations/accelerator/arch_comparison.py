@@ -146,8 +146,18 @@ def plot_power_bar():
                  fontsize=12, fontname="Georgia", fontweight="bold")
 
     # Match the scatter plot's tick formatting
-    ax.tick_params(axis="both", labelsize=8)
-    for lbl in ax.get_xticklabels() + ax.get_yticklabels():
+    # Chip names: bold name, regular parenthesis
+    styled = []
+    for name in names:
+        head, _, tail = name.partition("\n")
+        styled.append(rf"$\bf{{{head.replace(' ', r'\ ')}}}$"
+                      + ("\n" + tail if tail else ""))
+    ax.set_xticks(range(len(names)))
+    ax.set_xticklabels(styled, fontsize=8)
+
+    # y-axis (power scale) stays bold + small
+    ax.tick_params(axis="y", labelsize=8)
+    for lbl in ax.get_yticklabels():
         lbl.set_fontweight("bold")
     ax.grid(axis="y", linestyle="--", alpha=0.4)
 
