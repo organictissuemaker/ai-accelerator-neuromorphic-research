@@ -64,9 +64,6 @@ set the endurance/retention/uniformity trade-off; TaOx currently best endurance.
 
 | Metric | Their Result | Compared To |
 |---|---|---|
-| Power | | |
-| Latency | | |
-| Accuracy | | |
 | Write speed | ns-scale switching| Flash: ~1 ms write, 0.1 ms erase |
 | Endurance | TaOx-based: >10¹² cycles (typical HfOx arrays: 10⁶) | Flash: ~10⁶ · DRAM: ~unlimited | 
 | Retention | 10 years (extrapolated, 85–150 °C stress) | DRAM: ms (needs refresh) |
