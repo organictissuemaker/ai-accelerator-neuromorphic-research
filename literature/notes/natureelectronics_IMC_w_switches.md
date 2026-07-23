@@ -38,8 +38,6 @@ Defines and organizes the whole IMC-with-resistive-devices field: (1) digital in
 
 ## Results
 
-*What numbers matter? Fill in what they measured.*
-
 | Aspeect | Statement |
 |---|---|
 | Crosspoint MVM |	I_i = Σ_j G_ij·V_j in 1 step (Ohm + Kirchhoff) vs multi-step digital MAC | 
@@ -53,17 +51,15 @@ Defines and organizes the whole IMC-with-resistive-devices field: (1) digital in
 
 ## How This Connects to My Project
 
-*Why did I read this? How does it inform my simulation or architecture design?*
-
----
-
-## What I'd Explore Further
-
-*What question did this paper raise that I want to investigate?*
+- The mechanism, at the source. Eq. 1 (I_i = Σ_j G_ij·V_j via Ohm + Kirchhoff, one step) is the crossbar MVM. Cite Ielmini & Wong for the concept; Shooshtari/Rathi restate it.
+- "Crosspoint arrays only compute approximate results and should be restricted to a limited set of error-tolerant tasks...data inference." Analog crossbar compute is inherently approximate — so error-tolerant workloads (SNN classification) are the only viable ones
+- Why tolerance must come from the workload. Storage fixes variability with verify-and-correct; "similar verify techniques are difficult to implement in computing." 
+- Material-choice caveat. RRAM (filamentary) is called out as more unstable than PCM because resistance is "extremely sensitive to individual atomic transitions" near the path.  
+- Variability nuance. Deterministic IMC is hurt by variability; stochastic / neural functions can benefit — reinforces a possible non-monotonic accuracy-vs-σ curve.
 
 ---
 
 ## 2-Sentence Explanation
 
-*Practice explaining this paper simply. 
+Ielmini & Wong define in-memory computing with resistive devices: a crossbar array does a whole matrix-vector multiply in one step by Ohm's and Kirchhoff's laws (I = Σ G·V), erasing the data movement that bottlenecks von Neumann machines. Their central caveat is that this analog computation is inherently approximate — usable only for error-tolerant tasks like inference — which is exactly why measuring how much RRAM variability an SNN can absorb before accuracy collapses is a well-posed and necessary question.
 
