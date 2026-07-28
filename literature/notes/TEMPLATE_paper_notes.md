@@ -54,12 +54,6 @@
 
 ---
 
-## What I'd Explore Further
-
-*What question did this paper raise that I want to investigate?*
-
----
-
 ## 2-Sentence Explanation
 
 *Practice explaining this paper simply. 
