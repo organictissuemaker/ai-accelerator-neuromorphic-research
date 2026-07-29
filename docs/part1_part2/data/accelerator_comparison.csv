@@ -1,0 +1,7 @@
+Metric,CPU,GPU,TPU,NPU
+Core type & count,Few out-of-order superscalar cores,Thousands of SIMT cores,Systolic MAC array (MXU),MAC / dataflow array
+Memory architecture,Deep cache hierarchy (L1/L2/L3) + DRAM,Register file + shared memory / L2 + HBM,Unified on-chip buffer + HBM,On-chip SRAM + DRAM
+Parallelism model,ILP / few threads (MIMD),SIMT (massive data parallelism),Systolic spatial dataflow,Spatial dataflow
+Power (TDP),[TBD - cite],[TBD - cite],[TBD - cite],[TBD - cite]
+AI performance (TOPS/FLOPS + precision),[TBD - cite FP32/BF16/INT8],[TBD - cite],[TBD - cite],[TBD - cite]
+Typical role,General-purpose / control-heavy,Training + high-throughput inference,Datacenter ML,Edge / mobile inference
