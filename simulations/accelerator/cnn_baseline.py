@@ -3,9 +3,10 @@
 Route A - Step 1: Conventional CNN baseline + CPU/GPU inference benchmark.
 
 Trains a LeNet-style CNN on MNIST, then benchmarks inference on the available
-device(s) (CPU and, if present, CUDA GPU). Logs accuracy, latency-per-inference,
-throughput, MAC count, and parameter count. Results are appended to a CSV so
-they can feed the Step 4 comparison table and Step 5 headline figure.
+device(s): CPU, CUDA GPU (e.g. Colab), and Apple Silicon GPU (MPS). Logs
+accuracy, latency-per-inference, throughput, MAC count, and parameter count.
+Results are appended to a CSV so they feed the Step 4 comparison table and
+Step 5 headline figure.
 
 This is the "conventional accelerator" arm of the same-task comparison against
 the SNN. Keep the test set and batch size fixed across ALL runs (CNN, SNN) so
@@ -15,7 +16,7 @@ Usage
 -----
     python cnn_baseline.py                 # train + benchmark on all devices
     python cnn_baseline.py --epochs 3      # fewer epochs
-    python cnn_baseline.py --device cpu    # restrict to one device
+    python cnn_baseline.py --device cpu    # restrict to one device (cpu/cuda/mps)
     python cnn_baseline.py --weights lenet_mnist.pt   # reuse saved weights
 
 Dependencies: torch, torchvision, numpy. (No thop/ptflops needed - MACs are
@@ -37,6 +38,30 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
+
+
+# --------------------------------------------------------------------------- #
+# Device helpers
+# --------------------------------------------------------------------------- #
+def mps_available() -> bool:
+    return getattr(torch.backends, "mps", None) is not None and \
+        torch.backends.mps.is_available()
+
+
+def sync(device):
+    """Block until the device finishes queued work (needed for honest timing)."""
+    if device.type == "cuda":
+        torch.cuda.synchronize()
+    elif device.type == "mps":
+        torch.mps.synchronize()
+
+
+def best_train_device():
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if mps_available():
+        return torch.device("mps")
+    return torch.device("cpu")
 
 
 # --------------------------------------------------------------------------- #
@@ -66,18 +91,19 @@ class LeNet(nn.Module):
 # Data
 # --------------------------------------------------------------------------- #
 def get_loaders(data_dir: str, batch_size: int):
-    # Standard MNIST normalization.
     tf = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,)),
     ])
     train_set = datasets.MNIST(data_dir, train=True, download=True, transform=tf)
     test_set = datasets.MNIST(data_dir, train=False, download=True, transform=tf)
+    # pin_memory only helps CUDA; disable it elsewhere (avoids an MPS warning).
+    pin = torch.cuda.is_available()
     train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True,
-                              num_workers=2, pin_memory=True)
+                              num_workers=2, pin_memory=pin)
     # Fixed test set, no shuffle -> reproducible across runs and vs. the SNN.
     test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False,
-                             num_workers=2, pin_memory=True)
+                             num_workers=2, pin_memory=pin)
     return train_loader, test_loader, len(test_set)
 
 
@@ -107,8 +133,8 @@ def train(model, loader, device, epochs, lr):
 def count_macs(model, device):
     """Count multiply-accumulate ops for ONE 28x28 sample.
 
-    MACs are derived from the actual output tensor shapes, so this stays
-    correct if the architecture changes.
+    Derived from actual output tensor shapes, so it stays correct if the
+    architecture changes.
         Conv2d MAC = out_H * out_W * out_C * (in_C * kH * kW)
         Linear MAC = in_features * out_features
     Pooling / ReLU are not MACs and are ignored (standard convention).
@@ -147,16 +173,14 @@ def count_macs(model, device):
 def benchmark(model, loader, device, n_samples, warmup_batches=3):
     """Run inference and measure accuracy + timing on `device`."""
     model.to(device).eval()
-    is_cuda = device.type == "cuda"
 
-    # Warmup (lazy CUDA init, cuDNN autotune, caches).
+    # Warmup (lazy backend init, cuDNN autotune, kernel/shader caches).
     with torch.no_grad():
         for i, (images, _) in enumerate(loader):
             model(images.to(device))
             if i + 1 >= warmup_batches:
                 break
-    if is_cuda:
-        torch.cuda.synchronize()
+    sync(device)
 
     correct = 0
     total_time = 0.0
@@ -164,12 +188,10 @@ def benchmark(model, loader, device, n_samples, warmup_batches=3):
         for images, targets in loader:
             images = images.to(device)
             targets = targets.to(device)
-            if is_cuda:
-                torch.cuda.synchronize()
+            sync(device)
             t0 = time.perf_counter()
             logits = model(images)
-            if is_cuda:
-                torch.cuda.synchronize()
+            sync(device)
             total_time += time.perf_counter() - t0
             correct += (logits.argmax(1) == targets).sum().item()
 
@@ -182,6 +204,8 @@ def benchmark(model, loader, device, n_samples, warmup_batches=3):
 def device_label(device):
     if device.type == "cuda":
         return f"GPU ({torch.cuda.get_device_name(device)})"
+    if device.type == "mps":
+        return "GPU (Apple MPS)"
     return f"CPU ({platform.processor() or platform.machine()})"
 
 
@@ -219,8 +243,9 @@ def main():
     p.add_argument("--data-dir", default="./data")
     p.add_argument("--weights", default=None,
                    help="Path to load/save model weights (.pt).")
-    p.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto",
-                   help="'auto' benchmarks CPU and GPU (if available).")
+    p.add_argument("--device", choices=["auto", "cpu", "cuda", "mps"],
+                   default="auto",
+                   help="'auto' benchmarks CPU + any GPU (CUDA or Apple MPS).")
     p.add_argument("--csv", default="../../results/metrics.csv",
                    help="CSV to append results to.")
     args = p.parse_args()
@@ -233,14 +258,15 @@ def main():
 
     # Model: load weights if provided & present, else train.
     model = LeNet()
-    train_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    train_device = best_train_device()
     if args.weights and os.path.exists(args.weights):
         print(f"Loading weights from {args.weights}")
         model.load_state_dict(torch.load(args.weights, map_location="cpu"))
     else:
-        print(f"Training LeNet on {train_device} for {args.epochs} epoch(s)...")
+        print(f"Training LeNet on {train_device.type} for {args.epochs} epoch(s)...")
         train(model, train_loader, train_device, args.epochs, args.lr)
         if args.weights:
+            model.to("cpu")
             torch.save(model.state_dict(), args.weights)
             print(f"Saved weights to {args.weights}")
     model.to("cpu")
@@ -255,9 +281,13 @@ def main():
         devices = [torch.device("cpu")]
         if torch.cuda.is_available():
             devices.append(torch.device("cuda"))
+        if mps_available():
+            devices.append(torch.device("mps"))
     else:
         if args.device == "cuda" and not torch.cuda.is_available():
             raise SystemExit("CUDA requested but not available.")
+        if args.device == "mps" and not mps_available():
+            raise SystemExit("MPS requested but not available.")
         devices = [torch.device(args.device)]
 
     print(f"\nBenchmarking on: {[d.type for d in devices]}")
