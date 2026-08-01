@@ -1,0 +1,3 @@
+timestamp,system,device_type,device_name,model,dataset,batch_size,test_samples,accuracy,latency_ms_per_inf,throughput_inf_per_s,workload_metric,workload_per_inf,params
+2026-08-01T04:22:44+00:00,macOS-26.5.2-arm64-arm-64bit-Mach-O,cpu,CPU (arm),SpikingLeNet(T=25),MNIST,128,10000,0.9849,0.9027,1107.7,spikes,10546.5,61706
+2026-08-01T04:22:51+00:00,macOS-26.5.2-arm64-arm-64bit-Mach-O,mps,GPU (Apple MPS),SpikingLeNet(T=25),MNIST,128,10000,0.9849,0.1855,5392.1,spikes,10546.5,61706
