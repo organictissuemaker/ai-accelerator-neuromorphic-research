@@ -1,7 +1,12 @@
 Metric,CPU,GPU,TPU,NPU
-Core type & count,Few out-of-order superscalar cores,Thousands of SIMT cores,Systolic MAC array (MXU),MAC / dataflow array
-Memory architecture,Deep cache hierarchy (L1/L2/L3) + DRAM,Register file + shared memory / L2 + HBM,Unified on-chip buffer + HBM,On-chip SRAM + DRAM
+Representative part (canonical),Intel Xeon 4th-gen (Sapphire Rapids),NVIDIA A100 (SXM),Google TPU v4,Google Coral Edge TPU
+Tier,Datacenter / server,Datacenter,Datacenter,Edge
+Core type & count,Few out-of-order superscalar cores (up to 60),Thousands of SIMT cores (432 Tensor Cores),Systolic MAC array (MXU),Edge-TPU MAC array
+Memory architecture,Deep cache hierarchy (L1/L2/L3) + DRAM,Register file + shared memory / L2 + HBM2e,Unified on-chip buffer + HBM2,On-chip SRAM + host DRAM
 Parallelism model,ILP / few threads (MIMD),SIMT (massive data parallelism),Systolic spatial dataflow,Spatial dataflow
-Power (TDP),[TBD - cite],[TBD - cite],[TBD - cite],[TBD - cite]
-AI performance (TOPS/FLOPS + precision),[TBD - cite FP32/BF16/INT8],[TBD - cite],[TBD - cite],[TBD - cite]
-Typical role,General-purpose / control-heavy,Training + high-throughput inference,Datacenter ML,Edge / mobile inference
+Power (TDP),Up to 350 W,400 W (SXM),~192 W max (170 W typical),2 W
+AI performance (peak),No clean vendor peak TOPS; AMX BF16/INT8 (2048 INT8 ops/cycle/core),624 TOPS INT8 / 312 TFLOPS FP16 (2x with sparsity),275 TOPS/TFLOPS (BF16 or INT8),4 TOPS INT8
+Typical role,General-purpose / control-heavy,Training + high-throughput inference,Datacenter ML training + inference,Edge / on-device inference
+Current flagship (July 2026),Intel Xeon 6 (Granite Rapids 6900P),NVIDIA B200 (Blackwell),Google Ironwood (TPU v7),Hailo-10H
+Flagship power (TDP),Up to 500 W,~1000 W (SXM - verify vs datasheet),Not publicly disclosed,~2.5 W typical
+Flagship AI performance (peak),AMX BF16/INT8 (no clean vendor TOPS),~9000 TFLOPS FP4 dense (~4500 FP8),4.6 PFLOPS FP8 per chip,40 TOPS INT4 / 20 TOPS INT8

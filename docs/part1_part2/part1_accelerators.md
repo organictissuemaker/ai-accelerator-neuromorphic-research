@@ -39,39 +39,84 @@ numbers from current datasheets / review papers.*
 
 ![CPU architecture](figures/part1_cpu.png)
 
-*Write 2–3 sentences: latency-optimized, control-heavy, general-purpose.*
+A CPU has a few large out-of-order, superscalar cores backed by a deep cache
+hierarchy. That silicon budget is spent making single threads fast — speculation,
+branch prediction, big caches — not on raw MAC throughput. It is flexible and
+control-friendly, but for the dense, regular matrix math in ML most of its area
+sits idle.
 
 ### GPU — thousands of SIMT cores + HBM
 
 ![GPU architecture](figures/part1_gpu.png)
 
-*Write 2–3 sentences: massive data parallelism (SIMT), high memory bandwidth.*
+A GPU packs thousands of simple cores that run in lockstep under the SIMT model,
+so one instruction drives many data lanes at once — a natural fit for the
+data-parallel MACs in neural networks. High-bandwidth memory (HBM) feeds those
+lanes fast enough to keep them busy. This makes GPUs the workhorse for both
+training and high-throughput inference.
 
 ### TPU — systolic MAC array (MXU) + unified on-chip buffer
 
 ![TPU architecture](figures/part1_tpu.png)
 
-*Write 2–3 sentences: systolic dataflow, weight reuse, datacenter ML.*
+A TPU replaces general cores with a systolic MAC array (the MXU): data flows
+through a grid of multiply-accumulate cells, so each value is reused across many
+operations without returning to memory. A large unified on-chip buffer keeps
+weights and activations close, minimizing costly DRAM traffic. This specialization
+delivers high throughput per watt on datacenter ML.
 
 ### NPU — MAC / dataflow array + on-chip SRAM (edge inference)
 
 ![NPU architecture](figures/part1_npu.png)
 
-*Write 2–3 sentences: spatial dataflow, low power, edge/mobile inference.*
+An NPU is a compact MAC / dataflow array with on-chip SRAM, designed for inference
+at the edge rather than datacenter scale. It runs quantized models (INT8 / INT4) at
+very low power — single-digit watts — trading peak throughput for energy
+efficiency. This suits on-device vision and, increasingly, small language models.
 
 ## 3. Comparison table
 
-Render or paste from `data/accelerator_comparison.csv`:
+Filled from `data/accelerator_comparison.csv`. One representative part per class —
+note the **tier**: the CPU/GPU/TPU are datacenter-class, the NPU is a 2 W edge
+part, so compare power within tier, not across it. All performance figures are
+**peak** (vendor-quoted), with the datatype stated.
 
 | Metric | CPU | GPU | TPU | NPU |
 |---|---|---|---|---|
-| Core type & count | Few OoO superscalar cores | Thousands of SIMT cores | Systolic MAC array (MXU) | MAC / dataflow array |
-| Memory architecture | L1/L2/L3 + DRAM | Shared mem / L2 + HBM | Unified buffer + HBM | On-chip SRAM + DRAM |
-| Parallelism model | ILP / few threads (MIMD) | SIMT | Systolic dataflow | Spatial dataflow |
-| Power (TDP) | *[cite]* | *[cite]* | *[cite]* | *[cite]* |
-| AI performance (TOPS + precision) | *[cite]* | *[cite]* | *[cite]* | *[cite]* |
+| Representative part | Intel Xeon 4th-gen (Sapphire Rapids) | NVIDIA A100 (SXM) | Google TPU v4 | Google Coral Edge TPU |
+| Tier | Datacenter | Datacenter | Datacenter | Edge |
+| Core type | Few OoO superscalar cores (≤60) | Thousands of SIMT cores | Systolic MAC array (MXU) | Edge-TPU MAC array |
+| Memory | L1/L2/L3 + DRAM | Shared mem / L2 + HBM2e | Unified buffer + HBM2 | On-chip SRAM + host DRAM |
+| Parallelism | ILP / few threads (MIMD) | SIMT | Systolic dataflow | Spatial dataflow |
+| Power (TDP) | up to 350 W | 400 W | ~192 W max | 2 W |
+| AI performance (peak) | AMX BF16/INT8 (no clean vendor TOPS — cite a benchmark) | 624 TOPS INT8 / 312 TFLOPS FP16 | 275 TOPS/TFLOPS (BF16 or INT8) | 4 TOPS INT8 |
 | Typical role | General-purpose | Training + inference | Datacenter ML | Edge inference |
+
+The table above uses **canonical, well-documented parts** to explain the
+architecture. Below are the **current flagships (July 2026)** so the study reads
+as up-to-date. Same tier caveat applies (NPU is an edge part); all figures peak.
+
+### Current flagships (July 2026)
+
+| Class | Current flagship | Power (TDP) | AI performance (peak) |
+|---|---|---|---|
+| CPU | Intel Xeon 6 (Granite Rapids, 6900P) | up to 500 W | AMX BF16/INT8 — no clean vendor TOPS |
+| GPU | NVIDIA B200 (Blackwell) | ~1,000 W (SXM — verify vs datasheet) | ~9,000 TFLOPS FP4 dense (~4,500 FP8) |
+| TPU | Google Ironwood (TPU v7) | not publicly disclosed | 4.6 PFLOPS FP8 per chip |
+| NPU | Hailo-10H | ~2.5 W typical | 40 TOPS INT4 / 20 TOPS INT8 |
 
 ## 4. Sources
 
-*List datasheets / papers used for the power and performance figures.*
+- NVIDIA A100 Tensor Core GPU datasheet (TDP, INT8/FP16 peak): https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet.pdf
+- NVIDIA Ampere Architecture whitepaper: https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf
+- Google Cloud TPU v4 specifications (peak compute, power, HBM): https://docs.cloud.google.com/tpu/docs/v4
+- Google Coral USB Accelerator datasheet v1.4 (4 TOPS INT8, 2 TOPS/W) — Mouser mirror (coral.ai host retired): https://www.mouser.com/datasheet/3/6072/1/Coral-USB-Accelerator-datasheet.pdf ; product page: https://coral.ai/products/accelerator
+- Intel 4th Gen Xeon (Sapphire Rapids) — TDP up to 350 W, AMX: Intel Xeon product brief and launch coverage (e.g. Tom's Hardware): https://www.tomshardware.com/news/intel-launches-sapphire-rapids-fourth-gen-xeon-cpus-and-ponte-vecchio-max-gpu-series
+
+**Current flagships (July 2026):**
+
+- NVIDIA B200 (Blackwell) — 192 GB HBM3e, ~9,000 TFLOPS FP4: https://www.nvidia.com/en-us/data-center/dgx-b200/ (confirm TDP on the official B200 datasheet)
+- Google Ironwood / TPU v7 — 4.6 PFLOPS FP8, 192 GB HBM3e: https://cloud.google.com/blog/products/compute/ironwood-tpus-and-new-axion-based-vms-for-your-ai-workloads and https://docs.cloud.google.com/tpu/docs/tpu7x
+- Intel Xeon 6 (Granite Rapids, 6900P) — up to 128 cores, up to 500 W, AMX: https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2025-02/xeon-6-granite-rapids-product-brief.pdf
+- Hailo-10H — 40 TOPS INT4 / 20 TOPS INT8, ~2.5 W: https://hailo.ai/products/ai-accelerators/hailo-10h-ai-accelerator/
+- *(For a CPU AMX benchmark number, add the specific measured source you use.)*

@@ -1,0 +1,5 @@
+timestamp,system,device_type,device_name,model,dataset,batch_size,test_samples,accuracy,latency_ms_per_inf,throughput_inf_per_s,workload_metric,workload_per_inf,params
+2026-07-31T00:00:00+00:00,macOS-AppleSilicon,cpu,CPU (Apple M-series),LeNet,MNIST,128,10000,0.9873,0.0390,25648.0,MACs,416520,61706
+2026-07-31T00:00:00+00:00,macOS-AppleSilicon,mps,GPU (Apple MPS),LeNet,MNIST,128,10000,0.9873,0.0211,47341.0,MACs,416520,61706
+2026-07-31T00:00:00+00:00,Linux-Colab,cpu,CPU (Colab vCPU),LeNet,MNIST,128,10000,0.9863,0.2655,3766.0,MACs,416520,61706
+2026-07-31T00:00:00+00:00,Linux-Colab,cuda,GPU (NVIDIA T4),LeNet,MNIST,128,10000,0.9863,0.0127,78835.0,MACs,416520,61706
