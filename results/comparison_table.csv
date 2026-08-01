@@ -1,0 +1,9 @@
+approach,model,device_name,device_type,accuracy,latency_ms_per_inf,throughput_inf_per_s,workload_metric,workload_per_inf
+CNN,LeNet,CPU (Apple M-series),cpu,0.9873,0.039,25648.0,MACs,416520.0
+CNN,LeNet,CPU (Colab vCPU),cpu,0.9863,0.2655,3766.0,MACs,416520.0
+CNN,LeNet,GPU (NVIDIA T4),cuda,0.9863,0.0127,78835.0,MACs,416520.0
+CNN,LeNet,GPU (Apple MPS),mps,0.9873,0.0211,47341.0,MACs,416520.0
+SNN,SpikingLeNet(T=25),CPU (Apple M-series),cpu,0.9849,0.9027,1108.0,spikes,10546.5
+SNN,SpikingLeNet(T=25),CPU (Colab vCPU),cpu,0.985,2.9772,336.0,spikes,10464.6
+SNN,SpikingLeNet(T=25),GPU (NVIDIA T4),cuda,0.985,0.7511,1331.0,spikes,10464.6
+SNN,SpikingLeNet(T=25),GPU (Apple MPS),mps,0.9849,0.1855,5392.0,spikes,10546.5
