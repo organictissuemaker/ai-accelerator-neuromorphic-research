@@ -1,0 +1,2 @@
+latency_ms,p50_ms,throughput_ips,n_iter,task,size,device,gpu_power_w
+2.083,2.028,480.07,50,matrix_mult,1000x1000,cpu,
