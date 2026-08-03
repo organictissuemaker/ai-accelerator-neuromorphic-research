@@ -18,3 +18,4 @@ Thumbs.db
 results/figures/*.png
 data/
 *.pt
+__pycache__/
