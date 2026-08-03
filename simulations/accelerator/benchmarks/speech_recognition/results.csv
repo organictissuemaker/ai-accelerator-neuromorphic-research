@@ -1,0 +1,2 @@
+latency_ms,p50_ms,throughput_ips,n_iter,task,model,audio_s,rtf,device,gpu_power_w,precision
+1733.052,1546.565,0.577,5,speech_recognition,tiny,15,0.116,cpu,,fp32
