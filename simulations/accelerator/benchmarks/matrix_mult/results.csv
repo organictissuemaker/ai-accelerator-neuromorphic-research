@@ -1,6 +1,9 @@
-latency_ms,p50_ms,throughput_ips,n_iter,task,size,device,gpu_power_w
-2.083,2.028,480.07,50,matrix_mult,1000x1000,cpu,
-2.004,2.002,498.89,50,matrix_mult,1000x1000,cpu,
-17.413,17.429,57.43,50,matrix_mult,2000x2000,cpu,
-159.368,147.683,6.27,50,matrix_mult,4000x4000,cpu,
-1444.392,1403.47,0.69,50,matrix_mult,8000x8000,cpu,
+latency_ms,p50_ms,throughput_ips,n_iter,task,size,device,gpu_power_w,precision
+2.083,2.028,480.07,50,matrix_mult,1000x1000,cpu,,fp32
+17.413,17.429,57.43,50,matrix_mult,2000x2000,cpu,,fp32
+159.368,147.683,6.27,50,matrix_mult,4000x4000,cpu,,fp32
+1444.392,1403.47,0.69,50,matrix_mult,8000x8000,cpu,,fp32
+0.508,0.503,1966.79,50,matrix_mult,1000x1000,cuda,27.4,fp32
+4.13,4.148,242.14,50,matrix_mult,2000x2000,cuda,70.1,fp32
+31.239,31.316,32.01,50,matrix_mult,4000x4000,cuda,68.6,fp32
+250.265,250.498,4.0,50,matrix_mult,8000x8000,cuda,63.1,fp32
