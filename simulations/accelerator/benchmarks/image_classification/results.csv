@@ -1,2 +1,7 @@
 latency_ms,p50_ms,throughput_ips,n_iter,task,model,batch,device,gpu_power_w,precision
 11.891,11.678,84.1,50,image_classification,resnet18,1,cpu,,fp32
+137.468,109.649,58.2,50,image_classification,resnet18,8,cpu,,fp32
+1217.963,1143.547,26.27,50,image_classification,resnet18,32,cpu,,fp32
+15.325,12.687,65.25,50,image_classification,resnet18,1,cpu,,fp32
+138.733,120.363,57.66,50,image_classification,resnet18,8,cpu,,fp32
+1279.396,1111.188,25.01,50,image_classification,resnet18,32,cpu,,fp32
