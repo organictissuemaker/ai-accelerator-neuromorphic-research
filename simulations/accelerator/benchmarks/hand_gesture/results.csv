@@ -1,2 +1,0 @@
-latency_ms,p50_ms,throughput_ips,n_iter,task,model,resolution,device,gpu_power_w,precision
-16.136,16.013,61.97,100,hand_gesture,mediapipe,640x480,cpu,,fp32

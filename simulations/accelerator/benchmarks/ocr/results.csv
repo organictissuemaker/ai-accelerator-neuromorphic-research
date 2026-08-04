@@ -1,4 +1,0 @@
-latency_ms,p50_ms,throughput_ips,n_iter,task,engine,device,gpu_power_w,precision
-278.868,279.805,3.586,10,ocr,tesseract,cpu,,fp32
-2974.885,2802.952,0.336,10,ocr,easyocr,cpu,,fp32
-101.643,97.045,9.838,10,ocr,easyocr,cuda,56.6,fp32
