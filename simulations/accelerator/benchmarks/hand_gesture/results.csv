@@ -1,0 +1,2 @@
+latency_ms,p50_ms,throughput_ips,n_iter,cpu_util_pct,ram_mb,gpu_mem_mb,task,model,resolution,device,gpu_power_w,precision
+22.469,23.058,44.51,100,97.5,1454.2,,hand_gesture,mediapipe,640x480,cpu,,fp32

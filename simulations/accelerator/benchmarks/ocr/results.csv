@@ -1,0 +1,4 @@
+latency_ms,p50_ms,throughput_ips,n_iter,cpu_util_pct,ram_mb,gpu_mem_mb,task,engine,device,gpu_power_w,precision
+200.751,199.357,4.981,10,4.5,618.0,,ocr,tesseract,cpu,,fp32
+3092.931,2942.603,0.323,10,99.5,1083.4,,ocr,easyocr,cpu,,fp32
+100.874,95.888,9.913,10,101.0,1220.1,330.7,ocr,easyocr,cuda,88.5,fp32

@@ -1,0 +1,4 @@
+latency_ms,p50_ms,throughput_ips,n_iter,cpu_util_pct,ram_mb,gpu_mem_mb,task,model,device,gpu_power_w,precision
+67.399,64.784,14.84,50,243.5,362.4,,object_detection,yolov8n,cpu,,fp32
+8.189,7.369,122.12,50,99.4,1398.5,34.7,object_detection,yolov8n,cuda,63.7,fp32
+8.561,8.337,116.81,50,97.4,1514.0,18.7,object_detection,yolov8n,cuda,39.1,fp16

@@ -1,0 +1,10 @@
+latency_ms,p50_ms,throughput_ips,n_iter,cpu_util_pct,ram_mb,gpu_mem_mb,task,model,batch,device,gpu_power_w,precision
+20.379,18.541,49.07,50,161.8,264.1,,image_classification,resnet18,1,cpu,,fp32
+293.66,264.89,27.24,50,165.7,314.0,,image_classification,resnet18,8,cpu,,fp32
+1571.606,1445.143,20.36,50,282.7,597.0,,image_classification,resnet18,32,cpu,,fp32
+3.429,3.169,291.63,50,103.2,1073.6,84.8,image_classification,resnet18,1,cuda,48.1,fp32
+9.508,9.478,841.4,50,100.3,1081.7,113.5,image_classification,resnet18,8,cuda,68.2,fp32
+27.083,27.044,1181.55,50,100.2,1099.4,294.7,image_classification,resnet18,32,cuda,67.1,fp32
+3.041,3.017,328.84,50,103.3,1209.6,40.2,image_classification,resnet18,1,cuda,41.2,fp16
+4.181,4.214,1913.42,50,99.1,1227.7,65.9,image_classification,resnet18,8,cuda,64.2,fp16
+13.991,14.035,2287.18,50,98.2,1229.1,161.4,image_classification,resnet18,32,cuda,67.9,fp16
