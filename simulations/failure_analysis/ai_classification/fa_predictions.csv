@@ -1,0 +1,9 @@
+file,true_class,pred_class,confidence,correct
+Bond_Wire_Failure_0.png,Bond Wire Failure,Bond Wire Failure,0.396,1
+Crack_Formation_0.png,Crack Formation,Dielectric Breakdown,0.212,0
+Dielectric_Breakdown_0.png,Dielectric Breakdown,Lithography defects,0.419,0
+Electromigration-EM_0.png,Electromigration-EM,Particle contamination,0.316,0
+Lithography_defects_0.png,Lithography defects,Lithography defects,0.257,1
+Particle_contamination_0.png,Particle contamination,Lithography defects,0.329,0
+Particle_contamination_1.png,Particle contamination,Particle contamination,0.510,1
+Stress_Migration_0.png,Stress Migration,Crack Formation,0.475,0
