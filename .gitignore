@@ -15,7 +15,6 @@ venv/
 Thumbs.db
 
 # Output (commit selectively)
-results/figures/*.png
 data/
 *.pt
 __pycache__/
